@@ -1,6 +1,6 @@
-# PyWikiHow
+# WHAPI
 
-An unofficial WikiWow python API. Uses BeautifulSoup to scrape WikiHow and return the data you want.
+An unofficial WikiWow API. Uses BeautifulSoup to scrape WikiHow and return the data you want.
 
 - [Installation](#install)
 - [Usage](#usage)
@@ -11,17 +11,17 @@ An unofficial WikiWow python API. Uses BeautifulSoup to scrape WikiHow and retur
 
 ## Installation
 ```bash
-pip install pywikihow
+pip install whapi
 ```
 
 ## Usage
 
 ### Random How To
 
-Learn random stuff! Retuns a random WikiHow article. Sometimes they're weird.
+Learn random stuff! Retuns a random WikiHow article. Sometimes they're weird. Sometimes they're really weird.
 
 ```python
-from pywikihow import RandomHowTo
+from whapi import RandomHowTo
 
 how_to = RandomHowTo()
 how_to.print()
@@ -31,7 +31,7 @@ how_to.print()
 ### Searching
 
 ```python
-from pywikihow import WikiHow, search_wikihow
+from whapi import WikiHow, search_wikihow
 
 
 max_results = 1  # default for optional argument is 10
@@ -51,7 +51,7 @@ for how_to in WikiHow.search("how to learn python"):
 Manipulate HowTo objects
 
 ```python
-from pywikihow import HowTo
+from whapi import HowTo
 
 how_to = HowTo("https://www.wikihow.com/Train-a-Dog")
 
@@ -76,3 +76,4 @@ how_to.print(extended=True)
 - Many WikiHow articles also contain "Parts" which break down further into sub-steps. Write a function to parse these additional divisions.
 - Add parser for tips
 - Add parser for warnings
+- Add function to cycle through useragent strings

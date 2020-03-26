@@ -5,22 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.5.4] 2020-03-26
+
+- Forking from original project to add features I want but that may not be useful to anyone else. Thanks to [OpenJarbas](https://github.com/OpenJarbas) for starting this.
 
 ## [0.5.3]  - 2020-03-23
 
 ### Added
 
-- HowTo().intro 
+- HowTo().intro
     - Thanks to [killhamster](https://github.com/killhamster) for this feature
-    
+
 ### Changed
 
 - text is now stripped of extra blank spaces
 
 ### Fixed
 
-- Some step summaries include extra divs (pictures for example) which 
+- Some step summaries include extra divs (pictures for example) which
 poluted the text, these are now removed
 
 ## [0.5.2]  - 2020-03-22
