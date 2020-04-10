@@ -1,12 +1,21 @@
 # WHAPI
 
-An unofficial WikiWow API. Uses BeautifulSoup to scrape WikiHow and return the data you want.
+The MediaWiki API is complicated and arcane, and can require esoteric knowledge of the MediaWiki software to use it effectively. Worse still, it's mostly obscured on WikiHow, and it's likely they'd rather you didn't know it was there altogether. WikiHow API (WHAPI) aims to simplify this to some degree, providing a Python-based interface to perform some useful functions, such as retrieving article intros, steps, and info. One can use the resulting data to build an app on top of WikiHow, or just to find random useful (or useless, more likely) information on how to do things.
+
+Obviously for a lot of these functions you could just go to the website, but what if you need to do weird stuff with the data and don't want to write your own webscraper?
 
 - [Installation](#install)
 - [Usage](#usage)
-  * [Random How To](#random-how-to)
-  * [Searching](#searching)
+  * [Article ID](#article-id)
+  * [Random HowTo](#random-howto)
+  * [Article Details](#article-details)
+  * [Images](#images)
+  * [Search](#search)
   * [Parsing](#parsing)
+    - [HTML](#html)
+    - [Intro](#intro)
+    - [Steps](#steps)
+- [ToDo](#todo)
 
 
 ## Installation
@@ -16,64 +25,93 @@ pip install whapi
 
 ## Usage
 
-### Random How To
+### Article ID
 
-Learn random stuff! Retuns a random WikiHow article. Sometimes they're weird. Sometimes they're really weird.
+Everything useful relies on a numeric article ID. You don't have to see this, but be aware that it's important. If you only have a URL, you can use get_id() to convert it to an article ID that can be passed to other functions.
 
 ```python
-from whapi import RandomHowTo
+from whapi import get_id
 
-how_to = RandomHowTo()
-how_to.print()
-
+article_id = get_id('https://www.wikihow.com/Chug-Water')
 ```
 
-### Searching
+### Random HowTo
+
+Learn random stuff! Retuns a random WikiHow article. Sometimes they're weird. Sometimes they're really weird. random_article() returns a randomized article ID that can then be passed to other functions.
 
 ```python
-from whapi import WikiHow, search_wikihow
+from whapi import random_article
 
+random_howto = random_article()
+```
 
-max_results = 1  # default for optional argument is 10
-how_tos = search_wikihow("how to learn programming", max_results)
-assert len(how_tos) == 1
-how_tos[0].print()
+### Article Details
 
+Uses the article ID to return a URL and title for an article.
 
-# for efficiency and to get unlimited entries, the best is to use the generator
-for how_to in WikiHow.search("how to learn python"):
-    how_to.print()
+```python
+from whapi import return_details
 
+article_info = return_details(635542)
+```
+
+### Images
+
+Retrieves a list of all images included in an article as URLs.
+
+```python
+from whapi import get_images
+
+image_list = get_images(1097122)
+```
+
+### Search
+
+Searches WikiHow for the a string and returns a list containing dict objects that contain article IDs, titles, and URLs. The default max results is 10, but this can be changed. MediaWiki's limit for this is 500. As for WikiHow, I don't know. You shouldn't need 500 search results anyway.
+
+```python
+from whapi import search
+
+search_results = search('goth', 5)
 ```
 
 ### Parsing
 
-Manipulate HowTo objects
+#### HTML
+
+All the parsing functions rely on get_html() to obtain some data to parse and package for you. Don't run them without it. It uses the article ID to retrieve information. You'll likely want to use the same data for the following functions, but nobody's making you.
 
 ```python
-from whapi import HowTo
+from whapi import get_html
 
-how_to = HowTo("https://www.wikihow.com/Train-a-Dog")
-
-data = how_to.as_dict()
-
-print(how_to.url)
-print(how_to.title)
-print(how_to.intro)
-print(how_to.n_steps)
-print(how_to.summary)
-
-first_step = how_to.steps[0]
-first_step.print()
-data = first_step.as_dict()
-
-how_to.print(extended=True)
-
+html = get_html(1632)
 ```
 
-### ToDo
+#### Intro
 
-- Many WikiHow articles also contain "Parts" which break down further into sub-steps. Write a function to parse these additional divisions.
+Every WikiHow article has an introductory paragraph or two. If you want this, use the parse_intro() function.
+
+```python
+from whapi import get_html, parse_intro
+
+html = get_html(1946507)
+intro_text = parse_intro(html)
+```
+
+#### Steps
+
+Every WikiHow article also has a list of steps, and they're chock full of really great stuff. Use parse_steps() to get a dict object that contains dict objects containing the step number, summary, and details.
+
+```python
+from whapi import get_html, parse_steps
+
+html = get_html(680027)
+steps = parse_steps(html)
+```
+
+## ToDo
+
+- Many WikiHow articles also contain "Methods" which break down further into sub-steps. Write a function to parse these additional divisions.
 - Add parser for tips
 - Add parser for warnings
-- Add function to cycle through useragent strings
+- I have code to rotate proxies and user agent strings, but since this no longer scrapes pages, this probably isn't necessary

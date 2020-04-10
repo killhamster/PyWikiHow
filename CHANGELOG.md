@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0]
+
+- Refactored functions to take advantage of WikiHow's underlying MediaWiki API and increase efficiency
+- No features rely on scraping any longer. JSON is now retrieved and parsed to provide relevant data
+- Removed classes that aren't really needed with the way data is returned now 
+
 ## [0.5.4] 2020-03-26
 
 - Forking from original project to add features I want but that may not be useful to anyone else. Thanks to [OpenJarbas](https://github.com/OpenJarbas) for starting this.
