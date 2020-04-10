@@ -75,8 +75,8 @@ def get_html(id):
     return html
 
 # get article intro/summary
-# expects input from get_html()
-def parse_intro(html):
+def parse_intro(id):
+    html = get_html(id)
     soup = bs4.BeautifulSoup(html, 'html.parser')
     intro_html = soup.find("div", {"class": "mf-section-0"})
     if not intro_html:
@@ -94,8 +94,8 @@ def parse_intro(html):
     return intro
 
 # cleans junk tags from html and returns a dict of steps
-# expects input from get_html()
-def parse_steps(html):
+def parse_steps(id):
+    html = get_html(id)
     steps = {}
     soup = bs4.BeautifulSoup(html, 'html.parser')
     step_html = soup.find("div", {"class": "mf-section-1"})

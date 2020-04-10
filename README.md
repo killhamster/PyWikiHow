@@ -79,7 +79,7 @@ search_results = search('goth', 5)
 
 #### HTML
 
-All the parsing functions rely on get_html() to obtain some data to parse and package for you. Don't run them without it. It uses the article ID to retrieve information. You'll likely want to use the same data for the following functions, but nobody's making you.
+All the parsing functions rely on get_html() to obtain some data to parse and package for you. It uses the article ID to retrieve information.
 
 ```python
 from whapi import get_html
