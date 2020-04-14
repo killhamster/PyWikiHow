@@ -47,7 +47,7 @@ random_howto = random_article()
 
 ### Article Details
 
-Uses the article ID to return a URL and title for an article.
+Uses the article ID to return a URL and title for an article. In addition, it returns whether an article is considered a stub or "low quality".
 
 ```python
 from whapi import return_details
@@ -115,3 +115,4 @@ steps = parse_steps(html)
 - Add parser for tips
 - Add parser for warnings
 - I have code to rotate proxies and user agent strings, but since this no longer scrapes pages, this probably isn't necessary
+- Unordered lists in steps break the parse_steps() function. For now they're ignored, but it would be nice to have them parsed and inserted into the correct step

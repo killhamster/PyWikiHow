@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='whapi',
-    version='0.6.1',
+    version='0.6.2',
     packages=['whapi'],
     url='https://github.com/killhamster/WHAPI',
     install_requires=["requests", "bs4"],
