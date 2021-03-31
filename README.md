@@ -79,7 +79,7 @@ search_results = search('goth', 5)
 
 #### HTML
 
-All the parsing functions rely on get_html() to obtain some data to parse and package for you. It uses the article ID to retrieve information.
+All the parsing functions rely on get_html() to obtain some data to parse and package for you. It uses the article ID to retrieve information. This function is built into the other parsing functions so it's not necessary to call it unless you want a big hunk of raw HTML.
 
 ```python
 from whapi import get_html
@@ -94,8 +94,8 @@ Every WikiHow article has an introductory paragraph or two. If you want this, us
 ```python
 from whapi import get_html, parse_intro
 
-html = get_html(1946507)
-intro_text = parse_intro(html)
+article_id = 1946507
+intro_text = parse_intro(article_id)
 ```
 
 #### Steps
@@ -105,8 +105,8 @@ Every WikiHow article also has a list of steps, and they're chock full of really
 ```python
 from whapi import get_html, parse_steps
 
-html = get_html(680027)
-steps = parse_steps(html)
+article_id = 680027
+steps = parse_steps(article_id)
 ```
 
 ## ToDo
